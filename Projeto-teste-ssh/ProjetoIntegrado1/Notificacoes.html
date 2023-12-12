@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #fff;
+        }
+
+        header {
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #001f3f, #003366);
+            color: #fff;
+            padding: 10px;
+        }
+
+        nav a img {
+            width: 30px;
+            height: 30px;
+            margin: 0 10px;
+        }
+
+        .menu-popup {
+            display: none;
+            position: absolute;
+            background: #001f3f;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .menu-popup a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            background-color: #003366;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+
+        button:hover {
+            background-color: #001f3f;
+        }
+
+        .success-message {
+            color: green;
+            margin-top: 5px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" id="menu-button">
+            <img src="./img/botao-de-menu.png" alt="Botão de Menu">
+        </a>
+
+        <a href="TelaInicial.html" id="menu-button">
+            <img src="./img/silhueta-de-icone-de-casa.png" alt="Botao de voltar para tela inicial">
+        </a>
+        
+        <div class="menu-popup" id="menu-popup">
+            <a href="MeuPerfil.html">Meu Perfil</a>
+            <a href="">Notificações</a>
+            <a href="RegistroVacina.html">Registro de Vacina</a>
+            <a href="HistoricoVacina.html">Histórico</a>
+            <a href="index.html">Sair</a>
+        </div>
+    </nav>
+
+    <section>
+        <h1>Notificações</h1>
+    </section>
+
+    <div class="button-container">
+        <button id="ativar-notificacoes">Ativar Notificações</button>
+        <button id="desativar-notificacoes">Desativar Notificações</button>
+    </div>
+    
+    <script >
+        document.addEventListener('DOMContentLoaded', function () {
+            // Verificar se o navegador suporta notificações
+            if (!("Notification" in window)) {
+                alert("Este navegador não suporta notificações.");
+                document.getElementById('ativar-notificacoes').disabled = true;
+                document.getElementById('desativar-notificacoes').disabled = true;
+            }
+    
+            // Função para mostrar notificação
+            function mostrarNotificacao() {
+                if (Notification.permission === "granted") {
+                    var options = {
+                        body: 'Esta é uma notificação de exemplo.',
+                        icon: './img/notificacao.png' // Substitua pelo caminho correto do seu ícone
+                    };
+    
+                    var notificacao = new Notification('Título da Notificação', options);
+                } else if (Notification.permission !== 'denied') {
+                    Notification.requestPermission().then(function (permission) {
+                        if (permission === "granted") {
+                            mostrarNotificacao();
+                        }
+                    });
+                }
+            }
+    
+            // Ativar notificações
+            document.getElementById('ativar-notificacoes').addEventListener('click', function () {
+                mostrarNotificacao();
+            });
+    
+            // Desativar notificações
+            document.getElementById('desativar-notificacoes').addEventListener('click', function () {
+                Notification.permission = 'denied';
+                alert('Notificações desativadas.');
+            });
+        });
+        document.getElementById("menu-button").addEventListener("click", function () {
+                var menuPopup = document.getElementById("menu-popup");
+                if (menuPopup.style.display === "none" || menuPopup.style.display === "") {
+                    menuPopup.style.display = "block";
+                } else {
+                    menuPopup.style.display = "none";
+                }
+            });
+            </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f0f0f0; 
+        }
+
+        section {
+            padding: 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #3498db, #8e44ad); 
+            color: #fff; 
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
+            margin: 50px auto;
+            max-width: 1200px; 
+            min-height: 550px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h2 {
+            margin-bottom: 20px; 
+        }
+
+        .button, input[type="text"], input[type="password"] {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 600px) {
+            section {
+                padding: 20px;
+            }
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #4CAF50; 
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; 
+        }
+
+        .button:hover {
+            background-color: #45a049; 
+        }
+
+      
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <section>
+        <form id="loginForm" action="#" method="post">
+            <input type="text" name="usuario" placeholder="Usuário" required>
+            <input type="password" name="senha" placeholder="Senha" required>
+            <button type="button" class="button" onclick="validateLogin()">Login</button>
+            <p><a href="#" onclick="forgotPassword()">Esqueceu a senha?</a></p>
+        </form>
+    </section>
+
+    <script>function validateLogin() {
+        // Obter os valores dos campos de entrada
+        var username = document.getElementsByName("usuario")[0].value;
+        var password = document.getElementsByName("senha")[0].value;
+    
+        // Validar se os campos estão preenchidos
+        if (username === "" || password === "") {
+            alert("Por favor, preencha todos os campos.");
+            return;
+        }
+    
+        
+        if (username === "janson" && password === "123" || username === "hoss" && password === "123") {
+            alert("Login bem-sucedido!");
+
+    
+            // Redirecionar para a página desejada após o login bem-sucedido
+            window.location.href = "TelaInicial.html";
+        } else {
+            alert("Credenciais inválidas. Tente novamente.");
+        }
+    }
+    function forgotPassword() {
+            var username = prompt("Digite o e-mail associado à sua conta para recuperar a senha:");
+
+            // Verificação do formato de e-mail
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(username)) {
+                alert("Por favor, insira um endereço de e-mail válido.");
+                return;
+            }
+
+            
+            alert("Um e-mail de recuperação de senha foi enviado para o endereço associado à conta.");
+        }
+    </script>
+</body>
+</html>

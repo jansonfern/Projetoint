@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Vacina</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #fff;
+        }
+
+        header {
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #001f3f, #003366);
+            color: #fff;
+            padding: 10px;
+        }
+
+        nav a img {
+            width: 30px;
+            height: 30px;
+            margin: 0 10px;
+        }
+
+        .menu-popup {
+            display: none;
+            position: absolute;
+            background: #001f3f;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .menu-popup a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #003366;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #001f3f;
+        }
+
+        .success-message,
+        .error-message {
+            color: green;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" id="menu-button">
+            <img src="./img/botao-de-menu.png" alt="Botão de Menu">
+        </a>
+        <a href="TelaInicial.html" id="back-button">
+            <img src="./img/silhueta-de-icone-de-casa.png" alt="Botao de voltar para tela inicial">
+        </a>
+
+        <div class="menu-popup" id="menu-popup">
+            <a href="MeuPerfil.html">Meu Perfil</a>
+            <a href="Notificacoes.html">Notificações</a>
+            <a href="#">Registro de Vacina</a>
+            <a href="HistoricoVacina.html">Histórico</a>
+            <a href="index.html">Sair</a>
+        </div>
+    </nav>
+
+    <section>
+        <h1>Registro de Vacina</h1>
+
+        <form id="registro-vacina-form">
+            <label for="data-aplicacao">Data de Aplicação:</label>
+            <input type="date" id="data-aplicacao" name="data-aplicacao" required>
+
+            <label for="nome-vacina">Nome da Vacina:</label>
+            <input type="text" id="nome-vacina" name="nome-vacina" required>
+
+            <button type="submit">Registrar</button>
+        </form>
+        
+        <div class="success-message" id="success-message"></div>
+        <div class="error-message" id="error-message"></div>
+    </section>
+    <script>
+        function adicionarVacinaAoHistorico(data, nome) {
+          
+            var historicoVacinas = JSON.parse(localStorage.getItem('historicoVacinas')) || [];
+        
+            // Adicionar a nova vacina ao histórico
+            historicoVacinas.push({
+                data: data,
+                nome: nome
+            });
+        
+            // Atualizar o histórico no armazenamento local
+            localStorage.setItem('historicoVacinas', JSON.stringify(historicoVacinas));
+        }
+        
+        // formulário de registro de vacina
+        document.getElementById('registro-vacina-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+        
+            // Obter os valores do formulário
+            var dataAplicacao = document.getElementById('data-aplicacao').value;
+            var nomeVacina = document.getElementById('nome-vacina').value;
+        
+            // Adicionar a vacina ao histórico
+            adicionarVacinaAoHistorico(dataAplicacao, nomeVacina);
+        
+            // Exibir a mensagem de sucesso
+            var successMessage = document.getElementById('success-message');
+            successMessage.textContent = `Registro de vacina: Data ${dataAplicacao}, Vacina ${nomeVacina} realizado com sucesso.`;
+        
+            // Limpar os campos do formulário
+            document.getElementById('data-aplicacao').value = '';
+            document.getElementById('nome-vacina').value = '';
+        });
+        
+        document.getElementById('menu-button').addEventListener('click', function() {
+            console.log('Clique no botão de menu');
+            var menuPopup = document.getElementById('menu-popup');
+            if (menuPopup.style.display === 'block') {
+                menuPopup.style.display = 'none';
+            } else {
+                menuPopup.style.display = 'block';
+            }
+        });
+        
+        document.getElementById('back-button').addEventListener('click', function() {
+            console.log('Clique no botão de voltar');
+        });</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #fff;
+        }
+
+        header {
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+            
+        }
+
+        nav {
+            background: linear-gradient(135deg, #001f3f, #003366);
+            color: #fff;
+            padding: 10px;
+        }
+
+        nav a img {
+            width: 30px;
+            height: 30px;
+            margin: 0 10px;
+        }
+
+        .menu-popup {
+            display: none;
+            position: absolute;
+            background: #001f3f;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .menu-popup a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+    }
+
+        h2 {
+            text-align: center;
+            color: #555;
+        }
+        p {
+           text-align: center;
+            font-size: 18px;
+            color: black;
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .image-container .image-item {
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+            }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: block;
+            margin: 0; 
+            
+            }
+
+        @media (min-width: 768px) {
+            .image-container .image-item {
+                width: 45%;
+            }
+            }
+    </style>
+</head>
+<body>
+
+        <nav>
+            <div class="menu-icons">
+                <a href="#" id="menu-button">
+                    <img src="./img/botao-de-menu.png" alt="Botão de Menu">
+                </a>
+        
+                <a href="#" id="notificacao-button">
+                    <img src="./img/notificacao.png" alt="Ícone de Notificação">
+                </a>
+            </div>
+        
+            <div class="menu-popup" id="menu-popup">
+                <a href="MeuPerfil.html">Meu Perfil</a>
+                <a href="Notificacoes.html">Notificações</a>
+                <a href="RegistroVacina.html">Registro de Vacina</a>
+                <a href="HistoricoVacina.html">Histórico</a>
+                <a href="index.html">Sair</a>
+            </div>
+        </nav>
+        
+        <section>
+            <div class="image-container">
+                <div class="image-item">
+                    <div class="text-overlay">
+                        <h2>A Importância da Vacinação</h2>
+                        <p>
+                            A vacinação é essencial para prevenir doenças e proteger a saúde individual e coletiva. <br>
+                            Ao receber vacinas, fortalecemos nosso sistema imunológico, tornando-nos mais resistentes a infecções. <br>
+                            Além disso, a vacinação desempenha um papel crucial na criação da imunidade de rebanho, protegendo aqueles que não podem ser vacinados, <br>
+                            como bebês e pessoas com certas condições médicas. Contribuir para programas de imunização não é apenas um ato de autocuidado, mas também um gesto solidário para construir comunidades mais saudáveis.
+                        </p>
+                    </div>
+                    <img src="./img/vac.png" alt="Imagem 1">
+                </div>
+            </div>
+        </section>
+        
+        <script>
+            document.getElementById("menu-button").addEventListener("click", function () {
+                var menuPopup = document.getElementById("menu-popup");
+                if (menuPopup.style.display === "none" || menuPopup.style.display === "") {
+                    menuPopup.style.display = "block";
+                } else {
+                    menuPopup.style.display = "none";
+                }
+            });
+    </script>
+    
+
+</body>
+</html>

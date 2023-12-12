@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f0f0f0; 
+        }
+
+        section {
+            padding: 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #3498db, #8e44ad); 
+            color: #fff; 
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
+            margin: 50px auto; 
+            max-width: 1200px; 
+            min-height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h2 {
+            margin-bottom: 20px; 
+        }
+
+       
+        @media (max-width: 600px) {
+            section {
+                padding: 20px;
+            }
+        }
+
+        
+        .button {
+            display: inline-block;
+            padding: 10px 15px; 
+            margin: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #4CAF50; 
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <section>
+        <h2>BEM VINDO</h2>
+        <a href="cadastro.html" class="button">Cadastro</a>
+        <a href="login.html" class="button">Login</a>
+    </section>
+
+</body>
+</html>

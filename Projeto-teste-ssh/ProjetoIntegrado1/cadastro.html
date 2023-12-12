@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f0f0f0;
+        }
+
+        section {
+            padding: 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #3498db, #8e44ad); 
+            color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            margin: 50px auto;
+            max-width: 1200px;
+            min-height: 550px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h2 {
+            margin-bottom: 20px; 
+        }
+
+ 
+        @media (max-width: 600px) {
+            section {
+                padding: 20px;
+            }
+        }
+
+        
+        .button {
+            display: inline-block;
+            padding: 10px 15px; 
+            margin: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #4CAF50; 
+            cursor: pointer;
+            transition: background-color 0.3s ease; 
+        }
+
+        .button:hover {
+            background-color: #45a049; 
+        }
+
+     
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+     
+        input[type="date"] {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+  
+        .error-message {
+            color: #ff0000; 
+            margin-top: 5px;
+            text-align: left;
+        }
+
+       
+        .success-message {
+            color: #008000; 
+            margin-top: 5px;
+            text-align: left;
+        }
+
+     
+        input[type="date"].error {
+            border: 2px solid #ff0000; 
+        }
+    </style>
+</head>
+<body>
+
+    <section>
+        <h2>BEM VINDO</h2>
+        <form id="cadastroForm" action="#" method="post">
+            <input type="text" name="nome" placeholder="Nome" required pattern="[A-Za-z\s]+" title="Somente letras são permitidas">
+            <div class="error-message" id="nomeError"></div>
+
+            <input type="email" name="email" placeholder="E-mail" required>
+            <div class="error-message" id="emailError"></div>
+
+            <input type="password" name="senha" placeholder="Senha (mínimo 3 caracteres)" required pattern=".{3,}" title="A senha deve ter no mínimo 3 caracteres">
+            <div class="error-message" id="senhaError"></div>
+
+          
+            <input type="date" name="data_nascimento" placeholder="Data de Nascimento" required class="error">
+            <div class="error-message" id="dataNascimentoError"></div>
+
+            <button type="button" class="button" onclick="validateForm()">Cadastrar</button>
+        </form>
+        <div id="errorMessages"></div>
+        <div id="successMessage"></div>
+    </section>
+
+    <script>
+        function validateForm() {
+            var form = document.getElementById("cadastroForm");
+            var errorMessages = document.getElementById("errorMessages");
+            var successMessage = document.getElementById("successMessage");
+
+            // Limpar mensagens de erro e sucesso
+            errorMessages.innerHTML = "";
+            successMessage.innerHTML = "";
+
+            // Limpar mensagens de erro individuais
+            document.getElementById("nomeError").innerHTML = "";
+            document.getElementById("emailError").innerHTML = "";
+            document.getElementById("senhaError").innerHTML = "";
+            document.getElementById("dataNascimentoError").innerHTML = "";
+
+            // Validar campos
+            if (!form.checkValidity()) {
+                var inputs = form.querySelectorAll(":invalid");
+
+                for (var i = 0; i < inputs.length; i++) {
+                    var input = inputs[i];
+                    var errorMessage = input.validationMessage;
+
+                    // Exibir mensagem de erro ao lado do campo correspondente
+                    document.getElementById(input.name + "Error").textContent = errorMessage;
+
+                    // Adicionar a classe "error" para destacar campos inválidos
+                    input.classList.add("error");
+                }
+
+                // Verificar se já existe uma mensagem de erro geral
+                if (errorMessages.childElementCount === 0) {
+                    // Exibir mensagem de erro geral
+                    var errorDiv = document.createElement("div");
+                    errorDiv.className = "error-message";
+                    errorDiv.textContent = "Por favor, corrija os campos destacados.";
+                    errorMessages.appendChild(errorDiv);
+                }
+            } else {
+                // Formulário válido - exibir mensagem de sucesso
+                successMessage.textContent = "Usuário cadastrado com sucesso! Redirecionando para o login em 3 segundos...";
+
+                // Redirecionar para a página de login após 3 segundos
+                setTimeout(function () {
+                    window.location.href = "login.html";
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>

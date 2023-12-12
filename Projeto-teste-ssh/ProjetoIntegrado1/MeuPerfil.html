@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #fff;
+        }
+
+        header {
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #001f3f, #003366);
+            color: #fff;
+            padding: 10px;
+        }
+
+        nav a img {
+            width: 30px;
+            height: 30px;
+            margin: 0 10px;
+        }
+
+        .menu-popup {
+            display: none;
+            position: absolute;
+            background: #001f3f;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .menu-popup a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #003366;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #001f3f;
+        }
+
+        .success-message {
+            color: green;
+            margin-top: 5px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" id="menu-button">
+            <img src="./img/botao-de-menu.png" alt="Botão de Menu">
+        </a>
+
+        <a href="TelaInicial.html" id="menu-button">
+            <img src="./img/silhueta-de-icone-de-casa.png" alt="Botao de voltar para tela inicial">
+        </a>
+        
+        <div class="menu-popup" id="menu-popup">
+            <a href="#">Meu Perfil</a>
+            <a href="Notificacoes.html">Notificações</a>
+            <a href="RegistroVacina.html">Registro de Vacina</a>
+            <a href="HistoricoVacina.html">Histórico</a>
+            <a href="index.html">Sair</a>
+        </div>
+    </nav>
+
+    <section>
+        <form id="perfilForm">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu Nome" required>
+            <div id="nome-message" class="success-message"></div>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+            <div id="email-message" class="success-message"></div>
+
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" placeholder="Senha" required>
+            <div id="senha-message" class="success-message"></div>
+
+            <button type="button" onclick="atualizarPerfil()">Atualizar Perfil</button>
+        </form>
+    </section>
+    
+    <script>        function atualizarPerfil() {
+        var nome = document.getElementById('nome').value;
+        var email = document.getElementById('email').value;
+        var senha = document.getElementById('senha').value;
+
+        // Limpar mensagens de erro
+        document.getElementById('nome-message').innerText = '';
+        document.getElementById('email-message').innerText = '';
+        document.getElementById('senha-message').innerText = '';
+
+        // Validar campos
+        if (nome.trim() === '') {
+            document.getElementById('nome-message').innerText = 'Nome não pode estar em branco.';
+            return;
+        }
+
+        if (email.trim() === '' || !validarEmail(email)) {
+            document.getElementById('email-message').innerText = 'Por favor, insira um e-mail válido.';
+            return;
+        }
+
+        if (senha.length < 3) {
+            document.getElementById('senha-message').innerText = 'A senha deve ter no mínimo 3 caracteres.';
+            return;
+        }
+        alert('Perfil atualizado com sucesso!');
+    }
+
+    function validarEmail(email) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+    
+    document.addEventListener("DOMContentLoaded", function () {
+    var menuButton = document.getElementById("menu-button");
+    var menuPopup = document.getElementById("menu-popup");
+
+    menuButton.addEventListener("click", function () {
+
+    menuPopup.style.display = menuPopup.style.display === "block" ? "none" : "block";
+});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico de Vacina</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #fff;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #001f3f, #003366);
+            color: #fff;
+            padding: 10px;
+        }
+
+        nav a img {
+            width: 30px;
+            height: 30px;
+            margin: 0 10px;
+        }
+
+        .menu-popup {
+            display: none;
+            position: absolute;
+            background: #001f3f;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .menu-popup a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #003366;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #001f3f;
+        }
+
+        .success-message {
+            color: green;
+            margin-top: 5px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" id="menu-button">
+            <img src="./img/botao-de-menu.png" alt="Botão de Menu">
+        </a>
+
+        <a href="TelaInicial.html" id="back-button">
+            <img src="./img/silhueta-de-icone-de-casa.png" alt="Botao de voltar para tela inicial">
+        </a>
+        
+        <div class="menu-popup" id="menu-popup">
+            <a href="MeuPerfil.html">Meu Perfil</a>
+            <a href="Notificacoes.html">Notificações</a>
+            <a href="RegistroVacina.html">Registro de Vacina</a>
+            <a href="#">Histórico</a>
+            <a href="index.html">Sair</a>
+        </div>
+    </nav>
+
+    <section>
+        <h1>Histórico de Vacina:</h1>
+        <ul id="historico-list"></ul>
+        <button id="limpar-registros-button">Limpar Registros</button>
+    </section>
+    
+    <script>
+        document.getElementById('menu-button').addEventListener('click', function() {
+            var menuPopup = document.getElementById('menu-popup');
+            if (menuPopup.style.display === 'block') {
+                menuPopup.style.display = 'none';
+            } else {
+                menuPopup.style.display = 'block';
+            }
+        });
+    
+        // Função para exibir o histórico de vacinas
+        function exibirHistorico() {
+            var historicoList = document.getElementById('historico-list');
+            historicoList.innerHTML = '';
+    
+            // Obter o histórico de vacinas do armazenamento local
+            var historicoVacinas = JSON.parse(localStorage.getItem('historicoVacinas')) || [];
+    
+            // Exibir cada vacina no histórico
+            historicoVacinas.forEach(function(vacina) {
+                var listItem = document.createElement('li');
+                listItem.textContent = `Data: ${vacina.data}, Vacina: ${vacina.nome}`;
+                historicoList.appendChild(listItem);
+            });
+        }
+    
+        // Função para limpar o histórico de vacinas
+        document.getElementById('limpar-registros-button').addEventListener('click', function() {
+            localStorage.removeItem('historicoVacinas');
+            exibirHistorico();
+        });
+    
+        
+        exibirHistorico();
+</script>
+</body>
+</html>
